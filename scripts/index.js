@@ -82,12 +82,20 @@ function updateTime(){
   
   if(time>0){
     setTimeout(updateTime, 1000);
-  }elae{
+  }else{
     gameOver();
   }
 }
 
 updateTime();
+
+
+
+function gameOver(){
+  endgameEl.innerHTML = 
+  `<h1>Game Over</h1>
+  <p>Your final score is ${score}</p>`
+}
 
 
 
