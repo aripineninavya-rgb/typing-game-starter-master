@@ -60,29 +60,40 @@ function updateScore(){
 
 }
 
+function updateTimeDisplay(){
+
+  timeEl.textContent =time;
+
+}
+
 
 
 text.addEventListener("input", function(e){
 
  const typedText = e.target.value;
 
-  if(typedText === "randomWord"){
+  if(typedText === randomWord){
     updateScore();
     addWordToDOM();
     e.target.value = "";
     time += 5;
+    updateTimeDisplay();
 
   }
 
 });
 
 
+const timeInverval = setInterval (updateTime, 1000);
+
+
+
 function updateTime(){
   time--;
+  updateTimeDisplay();
   
-  if(time>0){
-    setTimeout(updateTime, 1000);
-  }else{
+  if(time <= 0){
+    clearInterval(timeInverval);
     gameOver();
   }
 }
@@ -92,9 +103,11 @@ updateTime();
 
 
 function gameOver(){
-  endgameEl.innerHTML = 
-  `<h1>Game Over</h1>
-  <p>Your final score is ${score}</p>`
+  endgameEl.innerHTML = `
+  <h1>Game Over</h1>
+  <p>Your final score is ${score}</p>
+  <button onclick ="location.reload()">Reload</button>`;
+  endgameEl.style.display = "flex";
 }
 
 
